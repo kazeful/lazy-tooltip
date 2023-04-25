@@ -13,7 +13,6 @@ export type LazyTooltipProps = ExtractPropTypes<typeof lazyTooltipProps>
 
 export default defineComponent({
   name: 'LazyTooltip',
-  inheritAttrs: false,
   props: lazyTooltipProps,
   setup(props) {
     const lazyTooltip = ref<HTMLDivElement | null>(null)
@@ -55,7 +54,7 @@ export default defineComponent({
 
 <template>
   <div ref="lazyTooltip" truncate>
-    <slot v-if="showTooltip" v-bind="$attrs" :text="text" />
+    <slot v-if="showTooltip" />
     <span v-else>{{ text }}</span>
   </div>
 </template>
