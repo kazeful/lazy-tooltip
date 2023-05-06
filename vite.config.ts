@@ -89,7 +89,7 @@ export default defineConfig(({ mode }) => {
       // https://github.com/antfu/unocss
       // see uno.config.ts for config
       UnoCSS({
-        mode: 'vue-scoped',
+        // mode: 'vue-scoped',
       }),
     ],
     optimizeDeps,
