@@ -1,13 +1,13 @@
 <script lang="ts">
 import type { ExtractPropTypes } from 'vue-demi'
-import { defineComponent, nextTick, onMounted, ref, watch } from 'vue-demi'
+import { defineComponent, onMounted, ref, watch } from 'vue-demi'
 
-export const lazyTooltipProps = {
+const lazyTooltipProps = {
   text: {
     type: String,
     required: true,
   },
-}
+} as const
 
 export type LazyTooltipProps = ExtractPropTypes<typeof lazyTooltipProps>
 
@@ -18,9 +18,10 @@ export default defineComponent({
     const lazyTooltip = ref<HTMLDivElement | null>(null)
     const showTooltip = ref(false)
 
-    watch(() => props.text, async () => {
-      await nextTick()
+    watch(() => props.text, () => {
       showTooltip.value = isTooltip(lazyTooltip.value!)
+    }, {
+      flush: 'post',
     })
 
     onMounted(() => {
@@ -53,7 +54,7 @@ export default defineComponent({
 </script>
 
 <template>
-  <div ref="lazyTooltip" truncate>
+  <div ref="lazyTooltip">
     <slot v-if="showTooltip" />
     <span v-else>{{ text }}</span>
   </div>
