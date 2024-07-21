@@ -61,9 +61,7 @@ export default defineConfig(({ mode }) => {
     plugins: [
       VueMacros({
         plugins: {
-          vue: Vue({
-            reactivityTransform: true,
-          }),
+          vue: Vue(),
         },
       }),
 
@@ -71,7 +69,7 @@ export default defineConfig(({ mode }) => {
       AutoImport({
         imports: [
           'vue',
-          'vue/macros',
+          // 'vue/macros',
           '@vueuse/core',
         ],
         dts: true,
